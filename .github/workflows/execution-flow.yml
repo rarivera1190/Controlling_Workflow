@@ -36,8 +36,8 @@ jobs:
         id: run-tests         # We add this to be able to refence it later
         run: npm run test
       - name: Upload test report 
-        if: steps.run-tests.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        if: failure() && steps.run-tests.outcome == 'failure' # We apply github special actions, failure. Returns true when any previous step or job failed.
+        uses: actions/upload-artifact@v4          # Previous line guarantees this step will run even if there are failing steps before.
         with:
           name: test-report
           path: test.json
