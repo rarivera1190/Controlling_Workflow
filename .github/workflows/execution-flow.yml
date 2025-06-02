@@ -76,6 +76,7 @@ jobs:
       - name: Deploy
         run: echo "Deploying..."
   report:
+    needs: [lint, deploy]   # without the needs the job will run parallel, which is not what we need. We include lint as it runs parallel and deploy since its the last step.
     if: failure()       # This job will run only if any other job before failed.
     runs-on: ubuntu-latest
     steps:
