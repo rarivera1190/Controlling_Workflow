@@ -39,6 +39,7 @@ jobs:
         run: npm run test
       - name: Upload test report 
         if: failure() && steps.run-tests.outcome == 'failure' # We apply github special actions, failure. Returns true when any previous step or job failed.
+        # When a 'continue-on-error step fails, the outcome is failure, but the final conclusion is success'.
         uses: actions/upload-artifact@v4          # Previous line guarantees this step will run even if there are failing steps before.
         with:
           name: test-report
