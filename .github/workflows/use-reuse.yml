@@ -76,6 +76,8 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact-name: dist-files
+#    secrets:           This is how you would pass a secret.
+#      some-secret: ${{secrets.some-secret}}
   report:
     needs: [lint, deploy]   # without the needs the job will run parallel, which is not what we need. We include lint as it runs parallel and deploy since its the last step.
     if: failure()       
