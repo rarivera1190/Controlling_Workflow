@@ -78,6 +78,12 @@ jobs:
       artifact-name: dist-files
 #    secrets:           This is how you would pass a secret.
 #      some-secret: ${{secrets.some-secret}}
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+        run: echo "${{needs.deploy.outputs.result}}"
   report:
     needs: [lint, deploy]   # without the needs the job will run parallel, which is not what we need. We include lint as it runs parallel and deploy since its the last step.
     if: failure()       
