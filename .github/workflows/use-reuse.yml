@@ -74,8 +74,8 @@ jobs:
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
-    with:
-      artifact-name: dist-files
+#    with:
+#      artifact-name: dist-files
   report:
     needs: [lint, deploy]   # without the needs the job will run parallel, which is not what we need. We include lint as it runs parallel and deploy since its the last step.
     if: failure()       
